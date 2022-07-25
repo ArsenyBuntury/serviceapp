@@ -1,0 +1,57 @@
+<%= form_with(model: order) do |form| %>
+  <% if order.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+        <% order.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name,  "Имя заказчика", style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :date, "Дата заказа", style: "display: block" %>
+    <%= form.date_field :date %>
+  </div>
+
+  <div class="mb-3 row">
+	<div class="col-sm-2 col-form-label">
+	<%= form.label :services %>
+	</div>
+
+	<div class="col-sm-10">
+	<%= form.collection_select :service_ids, services, :id, :title, {}, multiple: true %>
+	</div>
+	</div>
+
+   <div class="mb-3 row">
+	<div class="col-sm-2 col-form-label">
+	<%= form.label :staffs %>
+	</div>
+
+	<div class="col-sm-10">
+	<%= form.collection_select :staff_ids, staffs, :id, :name, {}, multiple: true %>
+	</div>
+	</div>
+
+  <div class="mb-3 row">
+	<div class="col-sm-2 col-form-label">
+	<%= form.label :categories %>
+	</div>
+
+	<div class="col-sm-10">
+	<%= form.collection_select :category_ids, categories, :id, :name, {}, multiple: true %>
+	</div>
+	</div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

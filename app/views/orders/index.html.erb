@@ -1,0 +1,21 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Orders</h1>
+
+<h2>Put a date</h2>
+<%= form_with model: @order do |f|%>
+<%=f.text_area :date  %>
+<%= sort(@date)%>
+<% end %>
+
+<div id="orders">
+  <% @orders.each do |order| %>
+    <%= render order %>
+    <p>
+      <%= link_to "Show this order", order %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New order", new_order_path %>
+<%= link_to "Download all as XLSX", orders_path(format: :xlsx) %>
